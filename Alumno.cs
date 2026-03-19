@@ -17,4 +17,12 @@ public class Alumno
     {
         return "DNI: " + DNI + "\r\nNombre: " + Nombre + "\r\nFaltas: " + CantFaltas;
     }
+    public void AgregarFalta(double falta)
+    {
+        CantFaltas += falta;
+    }
+    public bool EstaLibre()
+    {
+        return CantFaltas => 15;
+    }
 }

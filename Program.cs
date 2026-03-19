@@ -13,7 +13,7 @@
                     string nombre = IngresarStr("Ingrese el nombre del alumno.");
                     DNI = IngresarInt("Ingrese el DNI del alumno.", 0, int.MaxValue);
                     Colegio.AgregarAlumno(DNI, nombre);
-                    Console.WriteLine("Alumno agregado exitosamente.")
+                    Console.WriteLine("Alumno agregado exitosamente.");
                     break;
                 case 2:
                     DNI = IngresarInt("Ingrese el DNI del alumno.", 0, int.MaxValue);
@@ -23,10 +23,32 @@
                     else
                         Console.WriteLine(Estudiante.DevInfo());
                     break;
+                case 3:
+                    DNI = IngresarInt("Ingrese el DNI del alumno.", 0, int.MaxValue);
+                    Estudiante = Colegio.BuscarAlumno(DNI);
+                    if(Estudiante == null)
+                        Console.WriteLine("No se encontró al alumno.");
+                    else
+                        Console.WriteLine("¿Cuántas faltas querés agregar? (1) (0.5)");
+                        int falta;
+                        bool esCorrecto = int.TryParse(Console.ReadLine(), out falta);
+                        while(falta != 1 || falta != 0.5 && !esCorrecto)
+                        {
+                            Console.WriteLine("ERROR. Ingresá (1) o (0.5)");
+                            esCorrecto = int.TryParse(Console.ReadLine(), out falta);
+                        }
+                        Estudiante.AgregarFalta(falta);
+                    break;
                 case 4:
-                    
-
+                    foreach(Alumno alumno in Colegio.DevListaAlumnos())
+                        Console.WriteLine(alumno.DevInfo());
+                    break;
+                case 5:
+                    foreach(Alumno alumno in Colegio.DevListaAlumnosLibre())
+                        Console.WriteLine(alumno.DevInfo());
+                    break;
             }
+            Continuar();
         }while (opcion!=6);
     }
     static int IngresarInt(string mensaje, int min, int max)
@@ -50,5 +72,11 @@
             opcion = Console.ReadLine();
         }
         return opcion;
+    }
+    static void Continuar()
+    {
+        Console.WriteLine("Toque una tecla para continuar.");
+        Console.ReadKey();
+        Console.Clear();
     }
 }

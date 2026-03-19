@@ -9,13 +9,13 @@ public class Curso
     public bool AgregarAlumno(int DNI, string nombre)
     {
         if(BuscarAlumno(DNI) == null)
-            return false;
-        else
         {
             Alumno alumno = new Alumno(DNI, nombre);
-            ListaAlumnos.Add(alumno);
+            ListaAlumnos.Add(alumno);   // Estaba repetido
+            return true;
         }
-        return true;
+        else
+            return false;
     }
     public Alumno BuscarAlumno(int DNI)
     {
@@ -24,11 +24,24 @@ public class Curso
         {
             i++;
         }
-        if(i > ListaAlumnos.Count())
+        if(i < ListaAlumnos.Count())
             return ListaAlumnos[i];
         else
             return null;
     }
-    public void MostrarAlumnos
+    public List<Alumno> DevListaAlumnos()
+    {
+        return ListaAlumnos;
+    }
+    public List<Alumno> DevListaAlumnosLibre()
+    {
+        List<Alumno> alumnosLibres = new List<Alumno>();
+        foreach(Alumno alumno in ListaAlumnos)
+        {
+            if(alumno.EstaLibre())
+                alumnosLibres.Add(alumno);
+        }
+        return alumnosLibres;
+    }
 
 }
