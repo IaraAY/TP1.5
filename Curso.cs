@@ -1,42 +1,38 @@
 public class Curso
 {
-    private List<Alumno> ListaAlumnos;
+    private Dictionary<int, Alumno> DicAlumnos;
 
     public Curso()
     {
-        ListaAlumnos = new List<Alumno>();
+        DicAlumnos = new Dictionary<int, Alumno>();
     }
     public bool AgregarAlumno(int DNI, string nombre)
     {
-        if(BuscarAlumno(DNI) == null)
+        bool enDiccionario = DicAlumnos.ContainsKey(DNI);
+        if(!enDiccionario)
         {
             Alumno alumno = new Alumno(DNI, nombre);
-            ListaAlumnos.Add(alumno);   // Estaba repetido
-            return true;
+            DicAlumnos.Add(DNI, alumno);
+            return true;    // Se pudo agregar
         }
-        else
-            return false;
+        return false;
     }
     public Alumno BuscarAlumno(int DNI)
     {
-        int i = 0;
-        while(i < ListaAlumnos.Count() && DNI != ListaAlumnos[i].DevDNI())
-        {
-            i++;
-        }
-        if(i < ListaAlumnos.Count())
-            return ListaAlumnos[i];
+        bool enDiccionario = DicAlumnos.ContainsKey(DNI);
+        if(enDiccionario)
+            return DicAlumnos[DNI];
         else
             return null;
     }
-    public List<Alumno> DevListaAlumnos()
+    public Dictionary<int, Alumno> DevDicAlumnos()
     {
-        return ListaAlumnos;
+        return DicAlumnos;
     }
-    public List<Alumno> DevListaAlumnosLibre()
+    public List<Alumno> ListaAlumnosLibre()
     {
         List<Alumno> alumnosLibres = new List<Alumno>();
-        foreach(Alumno alumno in ListaAlumnos)
+        foreach(Alumno alumno in DicAlumnos.Values)
         {
             if(alumno.EstaLibre())
                 alumnosLibres.Add(alumno);

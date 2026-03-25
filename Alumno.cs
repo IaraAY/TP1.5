@@ -23,6 +23,6 @@ public class Alumno
     }
     public bool EstaLibre()
     {
-        return CantFaltas => 15;
+        return CantFaltas >= 15;
     }
 }

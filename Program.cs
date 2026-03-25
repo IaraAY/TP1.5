@@ -40,12 +40,12 @@
                         Estudiante.AgregarFalta(falta);
                     break;
                 case 4:
-                    foreach(Alumno alumno in Colegio.DevListaAlumnos())
-                        Console.WriteLine(alumno.DevInfo());
+                    foreach(int dni in Colegio.DevDicAlumnos().Keys)
+                        Console.WriteLine(Colegio.DevDicAlumnos()[dni].DevInfo());
                     break;
                 case 5:
-                    foreach(Alumno alumno in Colegio.DevListaAlumnosLibre())
-                        Console.WriteLine(alumno.DevInfo());
+                    foreach(Alumno alumnoLibre in Colegio.ListaAlumnosLibre())
+                        Console.WriteLine(alumnoLibre.DevInfo());
                     break;
             }
             Continuar();
