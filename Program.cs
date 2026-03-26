@@ -29,6 +29,7 @@
                     if(Estudiante == null)
                         Console.WriteLine("No se encontró al alumno.");
                     else
+                    {
                         Console.WriteLine("¿Cuántas faltas querés agregar? (1) (0.5)");
                         int falta;
                         bool esCorrecto = int.TryParse(Console.ReadLine(), out falta);
@@ -38,6 +39,8 @@
                             esCorrecto = int.TryParse(Console.ReadLine(), out falta);
                         }
                         Estudiante.AgregarFalta(falta);
+                    }
+                    
                     break;
                 case 4:
                     foreach(int dni in Colegio.DevDicAlumnos().Keys)
